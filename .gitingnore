@@ -1,0 +1,32 @@
+# 컴파일된 실행 파일
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# 로그 파일
+*.log
+
+# Go 빌드 디렉토리
+bin/
+pkg/
+
+# Go 모듈 파일
+go.sum
+
+# IDE 설정 파일 (Goland/IntelliJ IDEA)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# 환경 설정 파일
+.env
+.env.local
+
+# 다른 임시 파일들
+*.tmp
+*.swp
+*.swo
