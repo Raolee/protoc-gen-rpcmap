@@ -17,10 +17,7 @@ pkg/
 go.sum
 
 # IDE 설정 파일 (Goland/IntelliJ IDEA)
-.idea/
-*.iml
-*.iws
-*.ipr
+.idea/*
 
 # 환경 설정 파일
 .env
