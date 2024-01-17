@@ -3,7 +3,7 @@ package main
 import (
 	"google.golang.org/protobuf/cmd/protoc-gen-go/internal_gengo"
 	"google.golang.org/protobuf/compiler/protogen"
-	"protoc_gen_rpcmap"
+	"protoc_gen_rpcmap/model_converter"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 			if !file.Generate {
 				continue
 			}
-			err := protoc_gen_rpcmap.GenerateFile(gen, file)
+			err := model_converter.GenerateFile(gen, file)
 			if err != nil {
 				return err
 			}

@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package twophasecommit;
+
+option go_package = "2pc/proto/service";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  string bson_name = 50000; // 50000은 임의의 extension 번호입니다.
+}
+
+
+service TwoPhaseCommitService {
+  rpc Prepare(PrepareRequest) returns (PrepareResponse) {}
+  rpc Commit(CommitRequest) returns (CommitResponse){}
+  rpc Rollback(RollbackRequest) returns (RollbackResponse) {}
+  rpc Report(ReportRequest) returns (ReportResponse) {}
+}
+
+message Transaction {
+  string tx_id = 1 [(bson_name) = "txId"];
+  string domain = 2;
+
+  enum Status {
+    PREPARED = 0;
+    COMMITTING = 10;
+    COMMITTED = 11;
+    ROLLING_BACK = 20;
+    ROLLED_BACK = 21;
+  }
+  Status status = 10;
+}
+
+enum Result {
+  SUCCESS = 0;
+  ALREADY = 1;
+  FAILURE = 2;
+}
+
+message PrepareRequest {
+  string tx_id = 1;
+  optional string domain = 2;
+}
+
+message PrepareResponse {
+  string tx_id = 1;
+}
+
+message CommitRequest {
+  string tx_id = 1;
+  string domain = 2;
+}
+
+message CommitResponse {
+  Result result = 1;
+}
+
+message RollbackRequest {
+  string tx_id = 1;
+  string domain = 2;
+}
+
+message RollbackResponse {
+  Result result = 1;
+}
+
+message ReportRequest {
+  string tx_id = 1;
+  string domain = 2;
+
+  bool success = 11;
+}
+
+message ReportResponse {
+  Result result = 1;
+}

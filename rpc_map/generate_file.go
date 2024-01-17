@@ -1,4 +1,4 @@
-package protoc_gen_rpcmap
+package rpc_map
 
 import (
 	"fmt"
